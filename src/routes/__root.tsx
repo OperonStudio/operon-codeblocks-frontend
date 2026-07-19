@@ -1,13 +1,6 @@
-import { TanStackDevtools } from "@tanstack/react-devtools";
-import {
-  HeadContent,
-  Scripts,
-  createRootRouteWithContext,
-} from "@tanstack/react-router";
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { createRootRouteWithContext } from "@tanstack/react-router";
 
-import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
-
+import { RootDocument } from "#/modules/root-document";
 import "@morph-css/kit/css";
 import operonMorphCss from "@operon/ui/dist/morphcss.css?url";
 import operonCss from "@operon/ui/dist/style.css?url";
@@ -44,29 +37,3 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   }),
   shellComponent: RootDocument,
 });
-
-function RootDocument({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <TanStackDevtools
-          config={{
-            position: "bottom-right",
-          }}
-          plugins={[
-            {
-              name: "Tanstack Router",
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-            TanStackQueryDevtools,
-          ]}
-        />
-        <Scripts />
-      </body>
-    </html>
-  );
-}

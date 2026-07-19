@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "imports": {
-    "#/*": "./src/*"
+    "#/*": "./app/*",
+    "@/*": "./src/*"
   },
   "scripts": {
     "dev": "vite dev --port 3000",
@@ -17,8 +18,8 @@
   },
   "dependencies": {
     "@morph-css/kit": "^0.4.4",
-    "@operon/icons": "^1.0.9",
-    "@operon/ui": "^1.0.6",
+    "@operon/icons": "^1.0.11",
+    "@operon/ui": "^1.0.7",
     "@tanstack/react-devtools": "latest",
     "@tanstack/react-query": "latest",
     "@tanstack/react-query-devtools": "latest",
