@@ -1,9 +1,11 @@
 import { APP_NAME, ORG_NAME } from "#/common/constants";
 import { Header } from "#/components/header";
+import { HeaderItems } from "#/components/header/header-items";
+import { useAppTheme } from "#/contexts/theme";
 import { usePhone } from "#/libs/utils";
 import { cx } from "@morph-css/kit";
-import { Menu } from "@operon/icons";
-import { Box, Button, Sidebar } from "@operon/ui";
+import { Menu, Moon, Sun } from "@operon/icons";
+import { Box, Button, Sidebar, Toggle } from "@operon/ui";
 import { Link, useLocation, useMatches } from "@tanstack/react-router";
 import React from "react";
 import * as classes from "./style";
@@ -17,7 +19,7 @@ export const DashboardLayout = ({
   const matches = useMatches();
   const matchWithSidebar = matches.find((m) => m.staticData?.sidebarGroups);
   const { sidebarGroups = [] } = matchWithSidebar?.staticData || {};
-
+  const { isDark, toggleTheme } = useAppTheme();
   const isPhone = usePhone();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
@@ -40,6 +42,7 @@ export const DashboardLayout = ({
               <h2 {...classes.titleStyle}>{ORG_NAME}</h2>
             </Box>
           </Box>
+          <HeaderItems />
         </Box>
       )}
 
@@ -55,6 +58,25 @@ export const DashboardLayout = ({
           <Box>
             <h2 {...classes.titleStyle}>{ORG_NAME}</h2>
             <p {...classes.subtitleStyle}>{APP_NAME}</p>
+          </Box>
+          <Box display="flex" align="center" gap={8}>
+            <Sun
+              size={14}
+              color={
+                !isDark
+                  ? "var(--operon-color-primary)"
+                  : "var(--operon-color-text-muted)"
+              }
+            />
+            <Toggle size="sm" checked={isDark} onChange={toggleTheme} />
+            <Moon
+              size={14}
+              color={
+                isDark
+                  ? "var(--operon-color-primary)"
+                  : "var(--operon-color-text-muted)"
+              }
+            />
           </Box>
         </Box>
 

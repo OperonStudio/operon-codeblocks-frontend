@@ -10,3 +10,16 @@ export interface SidebarGroup {
   title: string;
   items: SidebarItem[];
 }
+
+export interface PageHeaderData {
+  title: string;
+  subtitle: string;
+  actions?: PageHeaderAction[];
+}
+
+export interface PageHeaderAction {
+  id: string;
+  label: string;
+  icon: React.ComponentType<IconProps>;
+  variant: "primary" | "secondary";
+}

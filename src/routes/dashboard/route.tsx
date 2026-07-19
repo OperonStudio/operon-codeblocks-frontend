@@ -1,10 +1,7 @@
-import { DashboardLayout } from "#/modules/dashboard-layout";
+import { Dashboard } from "#/modules/dashboard";
 import {
-  Boxes,
   CheckCircle2,
-  FileCode2,
   FileEdit,
-  FlaskConical,
   FolderKanban,
   GitBranch,
   KeyRound,
@@ -18,7 +15,7 @@ import {
   Undo2,
   Variable,
 } from "@operon/icons";
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/dashboard")({
   staticData: {
@@ -35,27 +32,22 @@ export const Route = createFileRoute("/dashboard")({
         ],
       },
       {
-        title: "EXPERIENCES",
-        items: [
-          { label: "Experiences", icon: Boxes, href: "/dashboard/experiences" },
-          { label: "Schemas", icon: FileCode2, href: "/dashboard/schemas" },
-          { label: "APIs", icon: Plug, href: "/dashboard/apis" },
-        ],
+        title: "APIs",
+        items: [{ label: "APIs", icon: Plug, href: "/dashboard/apis" }],
       },
       {
         title: "RUNTIME",
         items: [
-          { label: "Policies", icon: GitBranch, href: "/dashboard/policies" },
+          {
+            label: "Rule Engine",
+            icon: GitBranch,
+            href: "/dashboard/rule-engine",
+          },
           { label: "Context", icon: Variable, href: "/dashboard/context" },
           {
             label: "Feature Flags",
             icon: ToggleLeft,
             href: "/dashboard/feature-flags",
-          },
-          {
-            label: "Experiments",
-            icon: FlaskConical,
-            href: "/dashboard/experiments",
           },
         ],
       },
@@ -67,7 +59,7 @@ export const Route = createFileRoute("/dashboard")({
             icon: Layers,
             href: "/dashboard/environments",
           },
-          { label: "Drlafts", icon: FileEdit, href: "/dashboard/drafts" },
+          { label: "Drafts", icon: FileEdit, href: "/dashboard/drafts" },
           {
             label: "Approvals",
             icon: CheckCircle2,
@@ -95,13 +87,5 @@ export const Route = createFileRoute("/dashboard")({
       },
     ],
   },
-  component: RouteComponent,
+  component: Dashboard,
 });
-
-function RouteComponent() {
-  return (
-    <DashboardLayout>
-      <Outlet />
-    </DashboardLayout>
-  );
-}

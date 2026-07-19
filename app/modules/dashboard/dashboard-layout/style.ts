@@ -48,7 +48,6 @@ export const headerStyle = css({
   display: "flex",
   alignItems: "center",
   gap: "12px",
-  cursor: "pointer",
 });
 
 export const logoBoxStyle = css({

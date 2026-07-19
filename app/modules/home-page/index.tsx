@@ -13,7 +13,7 @@ export const HomePage = () => {
       justify="center"
       {...classes.homeBoxStyle}
     >
-      <Card {...classes.cardStyle}>
+      <Card {...classes.cardStyle} variant="outline">
         <Box display="flex" direction="column" align="center" gap="16px">
           <Rocket size={48} {...classes.rocketStyle} />
           <h1 {...classes.headingStyle}>Hello {APP_NAME}</h1>

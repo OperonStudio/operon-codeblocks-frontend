@@ -1,12 +1,14 @@
-import { Bell, ChevronDown, Search } from "@operon/icons";
-import { Box, Breadcrumb, Button, Dropdown, Input } from "@operon/ui";
-import { useLocation } from "@tanstack/react-router";
+import { usePhone } from "#/libs/utils";
+import { Search } from "@operon/icons";
+import { Box, Breadcrumb, Input } from "@operon/ui";
+import { useLocation, useMatches } from "@tanstack/react-router";
+import { HeaderItems } from "./header-items";
 import * as classes from "./style";
 
 export function Header() {
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
-
+  const isPhone = usePhone();
   const breadcrumbItems = [
     { label: "Operon", href: "/" },
     ...pathnames.map((path, index) => {
@@ -15,42 +17,26 @@ export function Header() {
       return { label, href };
     }),
   ];
-
+  const matches = useMatches();
+  const matchWithSearch = matches.find((m) => m.staticData?.search);
+  const { isSearchable = false, searchBarPlaceholder = "" } =
+    matchWithSearch?.staticData?.search || {};
   return (
     <Box {...classes.topbarStyle}>
       <Breadcrumb items={breadcrumbItems} />
 
-      <Box {...classes.searchContainerStyle}>
-        <Input
-          startIcon={<Search size={16} />}
-          placeholder="Search experiences, policies, flags..."
-          fullWidth
-          variant="filled"
-        />
-      </Box>
+      {isSearchable && !isPhone && (
+        <Box {...classes.searchContainerStyle}>
+          <Input
+            startIcon={<Search size={16} />}
+            placeholder={searchBarPlaceholder}
+            fullWidth
+            variant="filled"
+          />
+        </Box>
+      )}
 
-      <Box {...classes.rightActionsStyle}>
-        <Dropdown
-          trigger={
-            <Button variant="outline" size="sm">
-              <Box display="flex" align="center" gap={8}>
-                <Box {...classes.envIndicatorStyle} />
-                Development
-                <ChevronDown size={14} />
-              </Box>
-            </Button>
-          }
-          items={[
-            { value: "development", label: "Development" },
-            { value: "staging", label: "Staging" },
-            { value: "production", label: "Production" },
-          ]}
-        />
-
-        <Button variant="outline" size="sm" {...classes.iconButtonStyle}>
-          <Bell size={16} color="var(--operon-color-text-muted)" />
-        </Button>
-      </Box>
+      {!isPhone && <HeaderItems />}
     </Box>
   );
 }
