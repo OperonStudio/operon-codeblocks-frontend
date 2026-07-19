@@ -5,7 +5,7 @@ export const Route = createFileRoute("/dashboard/apis/")({
   staticData: {
     pageHeaderData: {
       title: "APIs",
-      subtitle: "Manage your APIs",
+      subtitle: "Auto-generated REST, GraphQL, and SDK endpoints",
     },
   },
 });

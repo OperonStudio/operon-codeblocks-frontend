@@ -1,8 +1,8 @@
 import { useHeaderActions } from "#/contexts/header-actions";
 import { Box, Button } from "@operon/ui";
 import { useEffect, useState } from "react";
-import { CreateProjectModal } from "./create-project-modal";
-import { ProjectCard } from "./project-card";
+import { CreateProjectModal } from "./partials/create-project-modal";
+import { ProjectCard } from "./partials/project-card";
 import * as classes from "./style";
 
 interface Project {

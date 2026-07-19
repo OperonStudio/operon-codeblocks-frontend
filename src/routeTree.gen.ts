@@ -17,6 +17,7 @@ import { Route as DashboardContextIndexRouteImport } from './routes/dashboard/co
 import { Route as DashboardFeatureFlagsIndexRouteImport } from './routes/dashboard/feature-flags/index'
 import { Route as DashboardProjectsIndexRouteImport } from './routes/dashboard/projects/index'
 import { Route as DashboardRuleEngineIndexRouteImport } from './routes/dashboard/rule-engine/index'
+import { Route as DashboardProjectsProjectIdIndexRouteImport } from './routes/dashboard/projects/$projectId/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -60,6 +61,12 @@ const DashboardRuleEngineIndexRoute =
     path: '/rule-engine/',
     getParentRoute: () => DashboardRouteRoute,
   } as any)
+const DashboardProjectsProjectIdIndexRoute =
+  DashboardProjectsProjectIdIndexRouteImport.update({
+    id: '/projects/$projectId/',
+    path: '/projects/$projectId/',
+    getParentRoute: () => DashboardRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/feature-flags/': typeof DashboardFeatureFlagsIndexRoute
   '/dashboard/projects/': typeof DashboardProjectsIndexRoute
   '/dashboard/rule-engine/': typeof DashboardRuleEngineIndexRoute
+  '/dashboard/projects/$projectId/': typeof DashboardProjectsProjectIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -79,6 +87,7 @@ export interface FileRoutesByTo {
   '/dashboard/feature-flags': typeof DashboardFeatureFlagsIndexRoute
   '/dashboard/projects': typeof DashboardProjectsIndexRoute
   '/dashboard/rule-engine': typeof DashboardRuleEngineIndexRoute
+  '/dashboard/projects/$projectId': typeof DashboardProjectsProjectIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -90,6 +99,7 @@ export interface FileRoutesById {
   '/dashboard/feature-flags/': typeof DashboardFeatureFlagsIndexRoute
   '/dashboard/projects/': typeof DashboardProjectsIndexRoute
   '/dashboard/rule-engine/': typeof DashboardRuleEngineIndexRoute
+  '/dashboard/projects/$projectId/': typeof DashboardProjectsProjectIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -102,6 +112,7 @@ export interface FileRouteTypes {
     | '/dashboard/feature-flags/'
     | '/dashboard/projects/'
     | '/dashboard/rule-engine/'
+    | '/dashboard/projects/$projectId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -111,6 +122,7 @@ export interface FileRouteTypes {
     | '/dashboard/feature-flags'
     | '/dashboard/projects'
     | '/dashboard/rule-engine'
+    | '/dashboard/projects/$projectId'
   id:
     | '__root__'
     | '/'
@@ -121,6 +133,7 @@ export interface FileRouteTypes {
     | '/dashboard/feature-flags/'
     | '/dashboard/projects/'
     | '/dashboard/rule-engine/'
+    | '/dashboard/projects/$projectId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -186,6 +199,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRuleEngineIndexRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
+    '/dashboard/projects/$projectId/': {
+      id: '/dashboard/projects/$projectId/'
+      path: '/projects/$projectId'
+      fullPath: '/dashboard/projects/$projectId/'
+      preLoaderRoute: typeof DashboardProjectsProjectIdIndexRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
   }
 }
 
@@ -196,6 +216,7 @@ interface DashboardRouteRouteChildren {
   DashboardFeatureFlagsIndexRoute: typeof DashboardFeatureFlagsIndexRoute
   DashboardProjectsIndexRoute: typeof DashboardProjectsIndexRoute
   DashboardRuleEngineIndexRoute: typeof DashboardRuleEngineIndexRoute
+  DashboardProjectsProjectIdIndexRoute: typeof DashboardProjectsProjectIdIndexRoute
 }
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
@@ -205,6 +226,7 @@ const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardFeatureFlagsIndexRoute: DashboardFeatureFlagsIndexRoute,
   DashboardProjectsIndexRoute: DashboardProjectsIndexRoute,
   DashboardRuleEngineIndexRoute: DashboardRuleEngineIndexRoute,
+  DashboardProjectsProjectIdIndexRoute: DashboardProjectsProjectIdIndexRoute,
 }
 
 const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
