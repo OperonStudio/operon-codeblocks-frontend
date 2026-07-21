@@ -1,9 +1,18 @@
 import { ProjectPage } from "#/modules/dashboard/project";
+import { getProjectsOptions } from "#/modules/dashboard/project/api";
 import { Plus } from "@operon/icons";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/dashboard/projects/")({
   component: ProjectPage,
+  loader: async ({ context }) => {
+    const projects =
+      await context.queryClient.ensureQueryData(getProjectsOptions);
+    console.log({ projects });
+    return {
+      projects,
+    };
+  },
   staticData: {
     pageHeaderData: {
       title: "Projects",

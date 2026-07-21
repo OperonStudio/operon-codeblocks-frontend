@@ -1,33 +1,21 @@
 import { useHeaderActions } from "#/contexts/header-actions";
 import { Box, Button } from "@operon/ui";
-import { useEffect, useState } from "react";
+import { useLoaderData } from "@tanstack/react-router";
+import { useState } from "react";
 import { CreateProjectModal } from "./partials/create-project-modal";
 import { ProjectCard } from "./partials/project-card";
 import * as classes from "./style";
 
 interface Project {
-  id: string;
   name: string;
   description: string;
-  createdAt: string;
 }
-
-const STORAGE_KEY = "operon_projects";
 
 export const ProjectPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [projects, setProjects] = useState<Project[]>([]);
-
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        setProjects(JSON.parse(stored));
-      }
-    } catch (e) {
-      console.error("Failed to parse stored projects", e);
-    }
-  }, []);
+  const { projects } = useLoaderData({ from: "/dashboard/projects/" }) as {
+    projects: Project[];
+  };
 
   useHeaderActions({
     create: () => {
@@ -35,25 +23,7 @@ export const ProjectPage = () => {
     },
   });
 
-  const handleCreateProject = ({
-    name,
-    description,
-  }: {
-    name: string;
-    description: string;
-  }) => {
-    const project: Project = {
-      id: crypto.randomUUID(),
-      name,
-      description,
-      createdAt: new Date().toISOString(),
-    };
-
-    const updated = [...projects, project];
-
-    setProjects(updated);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-
+  const handleCreateProject = async ({ name, description }: Project) => {
     setIsModalOpen(false);
   };
 
@@ -79,7 +49,7 @@ export const ProjectPage = () => {
         ) : (
           projects.map((project) => (
             <ProjectCard
-              key={project.id}
+              key={project.name}
               title={project.name}
               description={project.description}
               apiCount={0}

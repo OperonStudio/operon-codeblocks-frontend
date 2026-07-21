@@ -10,9 +10,12 @@ export const Dashboard = () => {
     <HeaderActionProvider>
       <DashboardLayout>
         <PageHeader />
-        <Box {...classes.dashboardStyle}>
+        <main
+          className={classes.dashboardStyle.className}
+          style={classes.dashboardStyle.style}
+        >
           <Outlet />
-        </Box>
+        </main>
       </DashboardLayout>
     </HeaderActionProvider>
   );

@@ -48,7 +48,7 @@ export const ProjectCard = ({
             {...classes.textGroupStyle}
             style={{ flex: isPhone ? 1 : "0 1 auto", minWidth: 0 }}
           >
-            <h3
+            <h2
               {...classes.titleStyle}
               style={{
                 overflow: "hidden",
@@ -57,7 +57,7 @@ export const ProjectCard = ({
               }}
             >
               {title}
-            </h3>
+            </h2>
             <p
               {...classes.descriptionStyle}
               style={{
@@ -91,6 +91,7 @@ export const ProjectCard = ({
             variant="ghost"
             size="sm"
             title="Edit"
+            aria-label={`Edit ${title}`}
             style={{ padding: "8px", minWidth: 0 }}
           >
             <FileEdit size={18} />
@@ -99,6 +100,7 @@ export const ProjectCard = ({
             variant="ghost"
             size="sm"
             title="Delete"
+            aria-label={`Delete ${title}`}
             style={{ padding: "8px", minWidth: 0 }}
           >
             <X size={18} />

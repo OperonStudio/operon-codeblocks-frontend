@@ -88,6 +88,7 @@ export const DashboardLayout = ({
         <Button
           variant="ghost"
           onClick={() => setIsMenuOpen(true)}
+          aria-label="Open menu"
           {...classes.menuButtonStyle}
         >
           <Box display="flex" align="center" justify="center">
