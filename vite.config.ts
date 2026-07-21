@@ -1,5 +1,6 @@
 import { devtools } from "@tanstack/devtools-vite";
 import { defineConfig } from "vite";
+import viteCompression from "vite-plugin-compression";
 
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 
@@ -15,6 +16,8 @@ const config = defineConfig({
     tanstackStart(),
     viteReact(),
     babel({ presets: [reactCompilerPreset()] }),
+    viteCompression({ algorithm: "brotliCompress" }),
+    viteCompression({ algorithm: "gzip" }),
   ],
 });
 

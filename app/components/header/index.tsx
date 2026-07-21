@@ -1,15 +1,14 @@
-import { usePhone } from "#/libs/utils";
 import { Search } from "@operon/icons";
 import { Box, Breadcrumb, Input } from "@operon/ui";
 import { useLocation, useMatches, useNavigate } from "@tanstack/react-router";
 import { HeaderItems } from "./header-items";
 import * as classes from "./style";
+import { cx } from "@morph-css/kit";
 
 export function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const pathnames = location.pathname.split("/").filter((x) => x);
-  const isPhone = usePhone();
 
   const breadcrumbItems = [
     {
@@ -45,8 +44,11 @@ export function Header() {
         <Breadcrumb items={breadcrumbItems} />
       </Box>
 
-      {isSearchable && !isPhone && (
-        <Box {...classes.searchContainerStyle}>
+      {isSearchable && (
+        <Box 
+          className={cx(classes.searchContainerStyle.className, classes.hideOnMobileStyle.className)}
+          style={{ ...classes.searchContainerStyle.style, ...classes.hideOnMobileStyle.style }}
+        >
           <Input
             startIcon={<Search size={16} />}
             placeholder={searchBarPlaceholder}
@@ -56,7 +58,9 @@ export function Header() {
         </Box>
       )}
 
-      {!isPhone && <HeaderItems />}
+      <Box className={classes.hideOnMobileStyle.className} style={classes.hideOnMobileStyle.style}>
+        <HeaderItems />
+      </Box>
     </Box>
   );
 }

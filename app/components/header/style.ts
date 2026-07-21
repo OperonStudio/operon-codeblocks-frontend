@@ -42,3 +42,9 @@ export const envIndicatorStyle = css({
 export const iconButtonStyle = css({
   padding: "8px",
 });
+
+export const hideOnMobileStyle = css({
+  "@media (max-width: 1024px)": {
+    display: "none",
+  },
+});

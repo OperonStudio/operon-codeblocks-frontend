@@ -4,6 +4,7 @@ import { RootDocument } from "#/modules/root-document";
 import "@morph-css/kit/css";
 import operonMorphCss from "@operon/ui/dist/morphcss.css?url";
 import operonCss from "@operon/ui/dist/style.css?url";
+
 import type { QueryClient } from "@tanstack/react-query";
 
 interface MyRouterContext {
@@ -25,6 +26,16 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
     ],
     links: [
+      {
+        rel: "preload",
+        as: "style",
+        href: operonCss,
+      },
+      {
+        rel: "preload",
+        as: "style",
+        href: operonMorphCss,
+      },
       {
         rel: "stylesheet",
         href: operonCss,

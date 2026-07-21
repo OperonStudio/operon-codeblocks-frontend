@@ -143,3 +143,15 @@ export const menuButtonStyle = css({
   minWidth: "auto",
   height: "auto",
 });
+
+export const desktopOnlyStyle = css({
+  "@media (max-width: 1024px)": {
+    display: "none",
+  },
+});
+
+export const mobileOnlyStyle = css({
+  "@media (min-width: 1025px)": {
+    display: "none",
+  },
+});

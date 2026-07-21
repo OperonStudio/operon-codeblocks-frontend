@@ -7,7 +7,7 @@
     "@/*": "./src/*"
   },
   "scripts": {
-    "dev": "vite dev --port 3000",
+    "dev": "vite dev --port 4000",
     "generate-routes": "tsr generate",
     "build": "vite build",
     "preview": "vite preview",
@@ -47,12 +47,7 @@
     "jsdom": "^28.1.0",
     "typescript": "^6.0.2",
     "vite": "^8.0.0",
+    "vite-plugin-compression": "^0.5.1",
     "vitest": "^4.1.5"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "lightningcss"
-    ]
   }
 }
