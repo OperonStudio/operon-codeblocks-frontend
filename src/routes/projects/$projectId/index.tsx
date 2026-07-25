@@ -2,12 +2,14 @@ import { ProjectIdPage } from "#/modules/project/projectId";
 import { Plus } from "@operon/icons";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { operonApiClient } from "#/libs/apiClient";
+import { getProjectsOptions } from "#/modules/project/api";
+import { getCollectionsOptions } from "#/modules/project/projectId/api";
 
 export const Route = createFileRoute("/projects/$projectId/")({
   component: ProjectIdPage,
   staticData: {
     pageHeaderData: {
+      title: "",
       subtitle: "Add your Collections Here",
       actions: [
         {
@@ -19,11 +21,19 @@ export const Route = createFileRoute("/projects/$projectId/")({
       ],
     },
   },
-  loader: async ({ params }) => {
+  loader: async ({ params, context }) => {
     try {
-      const project = await operonApiClient.get<any>(
-        `/api/projects/${params.projectId}`,
+      context.queryClient.ensureQueryData(
+        getCollectionsOptions(params.projectId),
       );
+
+      // Instead of an extra API call, we can try to find the project from the list query cache
+      const projects =
+        await context.queryClient.ensureQueryData(getProjectsOptions);
+      const project = projects.find(
+        (p: any) => (p.id || p.name) === params.projectId,
+      );
+
       return {
         pageHeaderData: {
           title: project?.name || "Project Details",

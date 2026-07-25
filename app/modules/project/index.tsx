@@ -1,7 +1,12 @@
 import { useHeaderActions } from "#/contexts/header-actions";
 import { Box, Button } from "@operon/ui";
-import { useLoaderData } from "@tanstack/react-router";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import { useState } from "react";
+import { createProjectOptions, getProjectsOptions } from "./api";
 import { CreateProjectModal } from "./partials/create-project-modal";
 import { ProjectCard } from "./partials/project-card";
 import * as classes from "./style";
@@ -13,10 +18,14 @@ interface Project {
 
 export const ProjectPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { projects } = useLoaderData({ from: "/projects/" }) as {
-    projects: Project[];
-  };
-
+  const queryClient = useQueryClient();
+  const { data: projects } = useSuspenseQuery(getProjectsOptions);
+  const createProject = useMutation({
+    ...createProjectOptions,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
+    },
+  });
   useHeaderActions({
     create: () => {
       setIsModalOpen(true);
@@ -25,6 +34,8 @@ export const ProjectPage = () => {
 
   const handleCreateProject = async ({ name, description }: Project) => {
     setIsModalOpen(false);
+    await createProject.mutateAsync({ name, description });
+    createProject.reset();
   };
 
   const handleOnClose = () => {

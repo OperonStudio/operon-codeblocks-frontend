@@ -55,3 +55,10 @@ export const contentAreaStyle = css({
   display: "flex",
   flexDirection: "column",
 });
+
+export const titleStyle = css({
+  fontSize: "18px",
+  fontWeight: "500",
+  color: "var(--operon-color-text)",
+  textTransform: "uppercase",
+});

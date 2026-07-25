@@ -56,7 +56,10 @@ export const DashboardLayout = ({
             <Box {...classes.groupTitleStyle}>{group.title}</Box>
             {group.items.map((item, j) => {
               const Icon = item.icon;
-              const isActive = location.pathname.includes(item.href);
+              const isActive =
+                item.href === "/"
+                  ? location.pathname === "/"
+                  : location.pathname.startsWith(item.href);
               return (
                 <Link
                   key={j}

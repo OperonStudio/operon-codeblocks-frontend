@@ -5,13 +5,8 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/projects/")({
   component: ProjectPage,
-  loader: async ({ context }) => {
-    const projects =
-      await context.queryClient.ensureQueryData(getProjectsOptions);
-    console.log({ projects });
-    return {
-      projects,
-    };
+  loader: ({ context }) => {
+    context.queryClient.ensureQueryData(getProjectsOptions);
   },
   staticData: {
     pageHeaderData: {
