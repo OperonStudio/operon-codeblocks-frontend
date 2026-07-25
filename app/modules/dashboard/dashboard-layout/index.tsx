@@ -51,12 +51,12 @@ export const DashboardLayout = ({
       </Box>
 
       <Box {...classes.scrollAreaStyle}>
-        {sidebarGroups?.map((group, i) => (
+        {sidebarGroups.map((group, i) => (
           <Box key={i} {...classes.groupContainerStyle}>
             <Box {...classes.groupTitleStyle}>{group.title}</Box>
             {group.items.map((item, j) => {
               const Icon = item.icon;
-              const isActive = location.pathname === item.href;
+              const isActive = location.pathname.includes(item.href);
               return (
                 <Link
                   key={j}

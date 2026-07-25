@@ -10,135 +10,151 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
+import { Route as RuleEngineRouteRouteImport } from './routes/rule-engine/route'
+import { Route as ApisIndexRouteImport } from './routes/apis/index'
+import { Route as ContextIndexRouteImport } from './routes/context/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
-import { Route as DashboardApisIndexRouteImport } from './routes/dashboard/apis/index'
-import { Route as DashboardContextIndexRouteImport } from './routes/dashboard/context/index'
-import { Route as DashboardFeatureFlagsIndexRouteImport } from './routes/dashboard/feature-flags/index'
-import { Route as DashboardProjectsIndexRouteImport } from './routes/dashboard/projects/index'
-import { Route as DashboardRuleEngineIndexRouteImport } from './routes/dashboard/rule-engine/index'
-import { Route as DashboardProjectsProjectIdIndexRouteImport } from './routes/dashboard/projects/$projectId/index'
+import { Route as FeatureFlagsIndexRouteImport } from './routes/feature-flags/index'
+import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
+import { Route as RuleEngineIndexRouteImport } from './routes/rule-engine/index'
+import { Route as ProjectsProjectIdIndexRouteImport } from './routes/projects/$projectId/index'
+import { Route as RuleEngineProjectIdIndexRouteImport } from './routes/rule-engine/$projectId/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DashboardRouteRoute = DashboardRouteRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
+const RuleEngineRouteRoute = RuleEngineRouteRouteImport.update({
+  id: '/rule-engine',
+  path: '/rule-engine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApisIndexRoute = ApisIndexRouteImport.update({
+  id: '/apis/',
+  path: '/apis/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContextIndexRoute = ContextIndexRouteImport.update({
+  id: '/context/',
+  path: '/context/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => DashboardRouteRoute,
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const DashboardApisIndexRoute = DashboardApisIndexRouteImport.update({
-  id: '/apis/',
-  path: '/apis/',
-  getParentRoute: () => DashboardRouteRoute,
+const FeatureFlagsIndexRoute = FeatureFlagsIndexRouteImport.update({
+  id: '/feature-flags/',
+  path: '/feature-flags/',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const DashboardContextIndexRoute = DashboardContextIndexRouteImport.update({
-  id: '/context/',
-  path: '/context/',
-  getParentRoute: () => DashboardRouteRoute,
-} as any)
-const DashboardFeatureFlagsIndexRoute =
-  DashboardFeatureFlagsIndexRouteImport.update({
-    id: '/feature-flags/',
-    path: '/feature-flags/',
-    getParentRoute: () => DashboardRouteRoute,
-  } as any)
-const DashboardProjectsIndexRoute = DashboardProjectsIndexRouteImport.update({
+const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
   id: '/projects/',
   path: '/projects/',
-  getParentRoute: () => DashboardRouteRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-const DashboardRuleEngineIndexRoute =
-  DashboardRuleEngineIndexRouteImport.update({
-    id: '/rule-engine/',
-    path: '/rule-engine/',
-    getParentRoute: () => DashboardRouteRoute,
-  } as any)
-const DashboardProjectsProjectIdIndexRoute =
-  DashboardProjectsProjectIdIndexRouteImport.update({
-    id: '/projects/$projectId/',
-    path: '/projects/$projectId/',
-    getParentRoute: () => DashboardRouteRoute,
+const RuleEngineIndexRoute = RuleEngineIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => RuleEngineRouteRoute,
+} as any)
+const ProjectsProjectIdIndexRoute = ProjectsProjectIdIndexRouteImport.update({
+  id: '/projects/$projectId/',
+  path: '/projects/$projectId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RuleEngineProjectIdIndexRoute =
+  RuleEngineProjectIdIndexRouteImport.update({
+    id: '/$projectId/',
+    path: '/$projectId/',
+    getParentRoute: () => RuleEngineRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/rule-engine': typeof RuleEngineRouteRouteWithChildren
+  '/apis/': typeof ApisIndexRoute
+  '/context/': typeof ContextIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
-  '/dashboard/apis/': typeof DashboardApisIndexRoute
-  '/dashboard/context/': typeof DashboardContextIndexRoute
-  '/dashboard/feature-flags/': typeof DashboardFeatureFlagsIndexRoute
-  '/dashboard/projects/': typeof DashboardProjectsIndexRoute
-  '/dashboard/rule-engine/': typeof DashboardRuleEngineIndexRoute
-  '/dashboard/projects/$projectId/': typeof DashboardProjectsProjectIdIndexRoute
+  '/feature-flags/': typeof FeatureFlagsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
+  '/rule-engine/': typeof RuleEngineIndexRoute
+  '/projects/$projectId/': typeof ProjectsProjectIdIndexRoute
+  '/rule-engine/$projectId/': typeof RuleEngineProjectIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/apis': typeof ApisIndexRoute
+  '/context': typeof ContextIndexRoute
   '/dashboard': typeof DashboardIndexRoute
-  '/dashboard/apis': typeof DashboardApisIndexRoute
-  '/dashboard/context': typeof DashboardContextIndexRoute
-  '/dashboard/feature-flags': typeof DashboardFeatureFlagsIndexRoute
-  '/dashboard/projects': typeof DashboardProjectsIndexRoute
-  '/dashboard/rule-engine': typeof DashboardRuleEngineIndexRoute
-  '/dashboard/projects/$projectId': typeof DashboardProjectsProjectIdIndexRoute
+  '/feature-flags': typeof FeatureFlagsIndexRoute
+  '/projects': typeof ProjectsIndexRoute
+  '/rule-engine': typeof RuleEngineIndexRoute
+  '/projects/$projectId': typeof ProjectsProjectIdIndexRoute
+  '/rule-engine/$projectId': typeof RuleEngineProjectIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/rule-engine': typeof RuleEngineRouteRouteWithChildren
+  '/apis/': typeof ApisIndexRoute
+  '/context/': typeof ContextIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
-  '/dashboard/apis/': typeof DashboardApisIndexRoute
-  '/dashboard/context/': typeof DashboardContextIndexRoute
-  '/dashboard/feature-flags/': typeof DashboardFeatureFlagsIndexRoute
-  '/dashboard/projects/': typeof DashboardProjectsIndexRoute
-  '/dashboard/rule-engine/': typeof DashboardRuleEngineIndexRoute
-  '/dashboard/projects/$projectId/': typeof DashboardProjectsProjectIdIndexRoute
+  '/feature-flags/': typeof FeatureFlagsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
+  '/rule-engine/': typeof RuleEngineIndexRoute
+  '/projects/$projectId/': typeof ProjectsProjectIdIndexRoute
+  '/rule-engine/$projectId/': typeof RuleEngineProjectIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/dashboard'
+    | '/rule-engine'
+    | '/apis/'
+    | '/context/'
     | '/dashboard/'
-    | '/dashboard/apis/'
-    | '/dashboard/context/'
-    | '/dashboard/feature-flags/'
-    | '/dashboard/projects/'
-    | '/dashboard/rule-engine/'
-    | '/dashboard/projects/$projectId/'
+    | '/feature-flags/'
+    | '/projects/'
+    | '/rule-engine/'
+    | '/projects/$projectId/'
+    | '/rule-engine/$projectId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/apis'
+    | '/context'
     | '/dashboard'
-    | '/dashboard/apis'
-    | '/dashboard/context'
-    | '/dashboard/feature-flags'
-    | '/dashboard/projects'
-    | '/dashboard/rule-engine'
-    | '/dashboard/projects/$projectId'
+    | '/feature-flags'
+    | '/projects'
+    | '/rule-engine'
+    | '/projects/$projectId'
+    | '/rule-engine/$projectId'
   id:
     | '__root__'
     | '/'
-    | '/dashboard'
+    | '/rule-engine'
+    | '/apis/'
+    | '/context/'
     | '/dashboard/'
-    | '/dashboard/apis/'
-    | '/dashboard/context/'
-    | '/dashboard/feature-flags/'
-    | '/dashboard/projects/'
-    | '/dashboard/rule-engine/'
-    | '/dashboard/projects/$projectId/'
+    | '/feature-flags/'
+    | '/projects/'
+    | '/rule-engine/'
+    | '/projects/$projectId/'
+    | '/rule-engine/$projectId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
+  RuleEngineRouteRoute: typeof RuleEngineRouteRouteWithChildren
+  ApisIndexRoute: typeof ApisIndexRoute
+  ContextIndexRoute: typeof ContextIndexRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+  FeatureFlagsIndexRoute: typeof FeatureFlagsIndexRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
+  ProjectsProjectIdIndexRoute: typeof ProjectsProjectIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -150,92 +166,95 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteRouteImport
+    '/rule-engine': {
+      id: '/rule-engine'
+      path: '/rule-engine'
+      fullPath: '/rule-engine'
+      preLoaderRoute: typeof RuleEngineRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apis/': {
+      id: '/apis/'
+      path: '/apis'
+      fullPath: '/apis/'
+      preLoaderRoute: typeof ApisIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/context/': {
+      id: '/context/'
+      path: '/context'
+      fullPath: '/context/'
+      preLoaderRoute: typeof ContextIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/': {
       id: '/dashboard/'
-      path: '/'
+      path: '/dashboard'
       fullPath: '/dashboard/'
       preLoaderRoute: typeof DashboardIndexRouteImport
-      parentRoute: typeof DashboardRouteRoute
+      parentRoute: typeof rootRouteImport
     }
-    '/dashboard/apis/': {
-      id: '/dashboard/apis/'
-      path: '/apis'
-      fullPath: '/dashboard/apis/'
-      preLoaderRoute: typeof DashboardApisIndexRouteImport
-      parentRoute: typeof DashboardRouteRoute
-    }
-    '/dashboard/context/': {
-      id: '/dashboard/context/'
-      path: '/context'
-      fullPath: '/dashboard/context/'
-      preLoaderRoute: typeof DashboardContextIndexRouteImport
-      parentRoute: typeof DashboardRouteRoute
-    }
-    '/dashboard/feature-flags/': {
-      id: '/dashboard/feature-flags/'
+    '/feature-flags/': {
+      id: '/feature-flags/'
       path: '/feature-flags'
-      fullPath: '/dashboard/feature-flags/'
-      preLoaderRoute: typeof DashboardFeatureFlagsIndexRouteImport
-      parentRoute: typeof DashboardRouteRoute
+      fullPath: '/feature-flags/'
+      preLoaderRoute: typeof FeatureFlagsIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/dashboard/projects/': {
-      id: '/dashboard/projects/'
+    '/projects/': {
+      id: '/projects/'
       path: '/projects'
-      fullPath: '/dashboard/projects/'
-      preLoaderRoute: typeof DashboardProjectsIndexRouteImport
-      parentRoute: typeof DashboardRouteRoute
+      fullPath: '/projects/'
+      preLoaderRoute: typeof ProjectsIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/dashboard/rule-engine/': {
-      id: '/dashboard/rule-engine/'
-      path: '/rule-engine'
-      fullPath: '/dashboard/rule-engine/'
-      preLoaderRoute: typeof DashboardRuleEngineIndexRouteImport
-      parentRoute: typeof DashboardRouteRoute
+    '/rule-engine/': {
+      id: '/rule-engine/'
+      path: '/'
+      fullPath: '/rule-engine/'
+      preLoaderRoute: typeof RuleEngineIndexRouteImport
+      parentRoute: typeof RuleEngineRouteRoute
     }
-    '/dashboard/projects/$projectId/': {
-      id: '/dashboard/projects/$projectId/'
+    '/projects/$projectId/': {
+      id: '/projects/$projectId/'
       path: '/projects/$projectId'
-      fullPath: '/dashboard/projects/$projectId/'
-      preLoaderRoute: typeof DashboardProjectsProjectIdIndexRouteImport
-      parentRoute: typeof DashboardRouteRoute
+      fullPath: '/projects/$projectId/'
+      preLoaderRoute: typeof ProjectsProjectIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rule-engine/$projectId/': {
+      id: '/rule-engine/$projectId/'
+      path: '/$projectId'
+      fullPath: '/rule-engine/$projectId/'
+      preLoaderRoute: typeof RuleEngineProjectIdIndexRouteImport
+      parentRoute: typeof RuleEngineRouteRoute
     }
   }
 }
 
-interface DashboardRouteRouteChildren {
-  DashboardIndexRoute: typeof DashboardIndexRoute
-  DashboardApisIndexRoute: typeof DashboardApisIndexRoute
-  DashboardContextIndexRoute: typeof DashboardContextIndexRoute
-  DashboardFeatureFlagsIndexRoute: typeof DashboardFeatureFlagsIndexRoute
-  DashboardProjectsIndexRoute: typeof DashboardProjectsIndexRoute
-  DashboardRuleEngineIndexRoute: typeof DashboardRuleEngineIndexRoute
-  DashboardProjectsProjectIdIndexRoute: typeof DashboardProjectsProjectIdIndexRoute
+interface RuleEngineRouteRouteChildren {
+  RuleEngineIndexRoute: typeof RuleEngineIndexRoute
+  RuleEngineProjectIdIndexRoute: typeof RuleEngineProjectIdIndexRoute
 }
 
-const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
-  DashboardIndexRoute: DashboardIndexRoute,
-  DashboardApisIndexRoute: DashboardApisIndexRoute,
-  DashboardContextIndexRoute: DashboardContextIndexRoute,
-  DashboardFeatureFlagsIndexRoute: DashboardFeatureFlagsIndexRoute,
-  DashboardProjectsIndexRoute: DashboardProjectsIndexRoute,
-  DashboardRuleEngineIndexRoute: DashboardRuleEngineIndexRoute,
-  DashboardProjectsProjectIdIndexRoute: DashboardProjectsProjectIdIndexRoute,
+const RuleEngineRouteRouteChildren: RuleEngineRouteRouteChildren = {
+  RuleEngineIndexRoute: RuleEngineIndexRoute,
+  RuleEngineProjectIdIndexRoute: RuleEngineProjectIdIndexRoute,
 }
 
-const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
-  DashboardRouteRouteChildren,
+const RuleEngineRouteRouteWithChildren = RuleEngineRouteRoute._addFileChildren(
+  RuleEngineRouteRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DashboardRouteRoute: DashboardRouteRouteWithChildren,
+  RuleEngineRouteRoute: RuleEngineRouteRouteWithChildren,
+  ApisIndexRoute: ApisIndexRoute,
+  ContextIndexRoute: ContextIndexRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+  FeatureFlagsIndexRoute: FeatureFlagsIndexRoute,
+  ProjectsIndexRoute: ProjectsIndexRoute,
+  ProjectsProjectIdIndexRoute: ProjectsProjectIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

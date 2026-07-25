@@ -1,5 +1,7 @@
+import { useHeaderActions } from "#/contexts/header-actions";
 import { FileEdit, X } from "@operon/icons";
 import { Box, Button, Chip } from "@operon/ui";
+import { useState } from "react";
 import * as classes from "./style";
 
 const dummyVariables = [
@@ -10,9 +12,22 @@ const dummyVariables = [
 ];
 
 export const ContextPage = () => {
+  const [variables, setVariables] = useState(dummyVariables);
+
+  useHeaderActions({
+    "add-context-button": () => {
+      const newVar = {
+        id: Date.now().toString(),
+        name: `new-context-${variables.length + 1}`,
+        type: "string",
+      };
+      setVariables([...variables, newVar]);
+    },
+  });
+
   return (
     <Box {...classes.contextListContainerStyle}>
-      {dummyVariables.map((variable) => (
+      {variables.map((variable) => (
         <Box key={variable.id} {...classes.contextItemStyle}>
           <Box {...classes.contextNameStyle}>{variable.name}</Box>
           <Box {...classes.contextRightSectionStyle}>

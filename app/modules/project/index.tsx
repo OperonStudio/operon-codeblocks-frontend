@@ -13,7 +13,7 @@ interface Project {
 
 export const ProjectPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { projects } = useLoaderData({ from: "/dashboard/projects/" }) as {
+  const { projects } = useLoaderData({ from: "/projects/" }) as {
     projects: Project[];
   };
 

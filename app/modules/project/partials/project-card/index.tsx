@@ -30,7 +30,7 @@ export const ProjectCard = ({
         style={{ padding: "24px" }}
       >
         <Link
-          to="/dashboard/projects/$projectId"
+          to="/projects/$projectId"
           params={{ projectId: title }}
           {...classes.linkStyle}
           style={{

@@ -24,15 +24,32 @@ function ActionButton({ action }: { action: PageHeaderAction }) {
 export function PageHeader() {
   const matches = useMatches();
   const matchWithPageHeaderData = matches.find(
-    (m) => m.staticData?.pageHeaderData,
+    (m) =>
+      (m.context as any)?.pageHeaderData ||
+      (m.loaderData as any)?.pageHeaderData ||
+      m.staticData?.pageHeaderData,
   );
 
   if (!matchWithPageHeaderData) return null;
 
-  const { pageHeaderData } = matchWithPageHeaderData.staticData as {
-    pageHeaderData: PageHeaderData;
+  const contextData =
+    (matchWithPageHeaderData.context as any)?.pageHeaderData || {};
+  const loaderData =
+    (matchWithPageHeaderData.loaderData as any)?.pageHeaderData || {};
+  const staticData =
+    (matchWithPageHeaderData.staticData as any)?.pageHeaderData || {};
+
+  const pageHeaderData = {
+    ...staticData,
+    ...loaderData,
+    ...contextData,
   };
-  const { title = "", subtitle = "", actions = [] } = pageHeaderData;
+
+  const {
+    title = "",
+    subtitle = "",
+    actions = [],
+  } = pageHeaderData as PageHeaderData;
 
   return (
     <Box {...classes.pageHeaderContainerStyle}>

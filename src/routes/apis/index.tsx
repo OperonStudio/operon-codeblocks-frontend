@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/dashboard/apis/")({
+export const Route = createFileRoute("/apis/")({
   component: RouteComponent,
   staticData: {
     pageHeaderData: {

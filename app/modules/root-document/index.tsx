@@ -3,6 +3,7 @@ import TanStackQueryDevtools from "@/integrations/tanstack-query/devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { Dashboard } from "../dashboard/index";
 
 export const RootDocument = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -11,7 +12,9 @@ export const RootDocument = ({ children }: { children: React.ReactNode }) => {
         <HeadContent />
       </head>
       <body>
-        <AppThemeProvider>{children}</AppThemeProvider>
+        <AppThemeProvider>
+          <Dashboard>{children}</Dashboard>
+        </AppThemeProvider>
         <TanStackDevtools
           config={{
             position: "bottom-right",

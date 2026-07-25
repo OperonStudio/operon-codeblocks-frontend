@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/dashboard/feature-flags/")({
+export const Route = createFileRoute("/feature-flags/")({
   component: RouteComponent,
   staticData: {
     pageHeaderData: {

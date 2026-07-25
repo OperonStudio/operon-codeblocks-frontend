@@ -1,8 +1,8 @@
-import { ContextPage } from "#/modules/dashboard/context-module";
+import { ContextPage } from "#/modules/context-module";
 import { Plus } from "@operon/icons";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/dashboard/context/")({
+export const Route = createFileRoute("/context/")({
   component: ContextPage,
   staticData: {
     pageHeaderData: {

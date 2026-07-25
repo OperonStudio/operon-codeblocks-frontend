@@ -1,9 +1,9 @@
-import { ProjectPage } from "#/modules/dashboard/project";
-import { getProjectsOptions } from "#/modules/dashboard/project/api";
+import { ProjectPage } from "#/modules/project";
+import { getProjectsOptions } from "#/modules/project/api";
 import { Plus } from "@operon/icons";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/dashboard/projects/")({
+export const Route = createFileRoute("/projects/")({
   component: ProjectPage,
   loader: async ({ context }) => {
     const projects =
