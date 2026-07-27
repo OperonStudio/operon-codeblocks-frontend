@@ -16,7 +16,6 @@ steps:
     name: Deploy
     inputs:
       vercelProjectId: '$(VERCEL_PROJECT_ID)'
-      vercelTeamId: '$(VERCEL_TEAM_ID)'
       vercelToken: '$(VERCEL_TOKEN)'
       production: $(isMain)
     condition: or(eq(variables.isMain, true), eq(variables['Build.Reason'], 'PullRequest'))
