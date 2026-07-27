@@ -5,9 +5,13 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+  - group: Vercel-Credentials
+  - name: isMain
+    value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
 
 steps:
+  - checkout: self
+
   - task: vercel-deployment-task@3
     name: Deploy
     inputs:
