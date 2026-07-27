@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RuleEngineRouteRouteImport } from './routes/rule-engine/route'
-import { Route as ApisIndexRouteImport } from './routes/apis/index'
+import { Route as ApiKeysIndexRouteImport } from './routes/api-keys/index'
 import { Route as ContextIndexRouteImport } from './routes/context/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as FeatureFlagsIndexRouteImport } from './routes/feature-flags/index'
@@ -19,6 +19,7 @@ import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as RuleEngineIndexRouteImport } from './routes/rule-engine/index'
 import { Route as ProjectsProjectIdIndexRouteImport } from './routes/projects/$projectId/index'
 import { Route as RuleEngineProjectIdIndexRouteImport } from './routes/rule-engine/$projectId/index'
+import { Route as RuleEngineProjectIdCollectionIdRouteImport } from './routes/rule-engine/$projectId/$collectionId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -30,9 +31,9 @@ const RuleEngineRouteRoute = RuleEngineRouteRouteImport.update({
   path: '/rule-engine',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApisIndexRoute = ApisIndexRouteImport.update({
-  id: '/apis/',
-  path: '/apis/',
+const ApiKeysIndexRoute = ApiKeysIndexRouteImport.update({
+  id: '/api-keys/',
+  path: '/api-keys/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContextIndexRoute = ContextIndexRouteImport.update({
@@ -71,27 +72,35 @@ const RuleEngineProjectIdIndexRoute =
     path: '/$projectId/',
     getParentRoute: () => RuleEngineRouteRoute,
   } as any)
+const RuleEngineProjectIdCollectionIdRoute =
+  RuleEngineProjectIdCollectionIdRouteImport.update({
+    id: '/$projectId/$collectionId',
+    path: '/$projectId/$collectionId',
+    getParentRoute: () => RuleEngineRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/rule-engine': typeof RuleEngineRouteRouteWithChildren
-  '/apis/': typeof ApisIndexRoute
+  '/api-keys/': typeof ApiKeysIndexRoute
   '/context/': typeof ContextIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/feature-flags/': typeof FeatureFlagsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/rule-engine/': typeof RuleEngineIndexRoute
+  '/rule-engine/$projectId/$collectionId': typeof RuleEngineProjectIdCollectionIdRoute
   '/projects/$projectId/': typeof ProjectsProjectIdIndexRoute
   '/rule-engine/$projectId/': typeof RuleEngineProjectIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/apis': typeof ApisIndexRoute
+  '/api-keys': typeof ApiKeysIndexRoute
   '/context': typeof ContextIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/feature-flags': typeof FeatureFlagsIndexRoute
   '/projects': typeof ProjectsIndexRoute
   '/rule-engine': typeof RuleEngineIndexRoute
+  '/rule-engine/$projectId/$collectionId': typeof RuleEngineProjectIdCollectionIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdIndexRoute
   '/rule-engine/$projectId': typeof RuleEngineProjectIdIndexRoute
 }
@@ -99,12 +108,13 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/rule-engine': typeof RuleEngineRouteRouteWithChildren
-  '/apis/': typeof ApisIndexRoute
+  '/api-keys/': typeof ApiKeysIndexRoute
   '/context/': typeof ContextIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/feature-flags/': typeof FeatureFlagsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/rule-engine/': typeof RuleEngineIndexRoute
+  '/rule-engine/$projectId/$collectionId': typeof RuleEngineProjectIdCollectionIdRoute
   '/projects/$projectId/': typeof ProjectsProjectIdIndexRoute
   '/rule-engine/$projectId/': typeof RuleEngineProjectIdIndexRoute
 }
@@ -113,35 +123,38 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/rule-engine'
-    | '/apis/'
+    | '/api-keys/'
     | '/context/'
     | '/dashboard/'
     | '/feature-flags/'
     | '/projects/'
     | '/rule-engine/'
+    | '/rule-engine/$projectId/$collectionId'
     | '/projects/$projectId/'
     | '/rule-engine/$projectId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/apis'
+    | '/api-keys'
     | '/context'
     | '/dashboard'
     | '/feature-flags'
     | '/projects'
     | '/rule-engine'
+    | '/rule-engine/$projectId/$collectionId'
     | '/projects/$projectId'
     | '/rule-engine/$projectId'
   id:
     | '__root__'
     | '/'
     | '/rule-engine'
-    | '/apis/'
+    | '/api-keys/'
     | '/context/'
     | '/dashboard/'
     | '/feature-flags/'
     | '/projects/'
     | '/rule-engine/'
+    | '/rule-engine/$projectId/$collectionId'
     | '/projects/$projectId/'
     | '/rule-engine/$projectId/'
   fileRoutesById: FileRoutesById
@@ -149,7 +162,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   RuleEngineRouteRoute: typeof RuleEngineRouteRouteWithChildren
-  ApisIndexRoute: typeof ApisIndexRoute
+  ApiKeysIndexRoute: typeof ApiKeysIndexRoute
   ContextIndexRoute: typeof ContextIndexRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
   FeatureFlagsIndexRoute: typeof FeatureFlagsIndexRoute
@@ -173,11 +186,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuleEngineRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/apis/': {
-      id: '/apis/'
-      path: '/apis'
-      fullPath: '/apis/'
-      preLoaderRoute: typeof ApisIndexRouteImport
+    '/api-keys/': {
+      id: '/api-keys/'
+      path: '/api-keys'
+      fullPath: '/api-keys/'
+      preLoaderRoute: typeof ApiKeysIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/context/': {
@@ -229,16 +242,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuleEngineProjectIdIndexRouteImport
       parentRoute: typeof RuleEngineRouteRoute
     }
+    '/rule-engine/$projectId/$collectionId': {
+      id: '/rule-engine/$projectId/$collectionId'
+      path: '/$projectId/$collectionId'
+      fullPath: '/rule-engine/$projectId/$collectionId'
+      preLoaderRoute: typeof RuleEngineProjectIdCollectionIdRouteImport
+      parentRoute: typeof RuleEngineRouteRoute
+    }
   }
 }
 
 interface RuleEngineRouteRouteChildren {
   RuleEngineIndexRoute: typeof RuleEngineIndexRoute
+  RuleEngineProjectIdCollectionIdRoute: typeof RuleEngineProjectIdCollectionIdRoute
   RuleEngineProjectIdIndexRoute: typeof RuleEngineProjectIdIndexRoute
 }
 
 const RuleEngineRouteRouteChildren: RuleEngineRouteRouteChildren = {
   RuleEngineIndexRoute: RuleEngineIndexRoute,
+  RuleEngineProjectIdCollectionIdRoute: RuleEngineProjectIdCollectionIdRoute,
   RuleEngineProjectIdIndexRoute: RuleEngineProjectIdIndexRoute,
 }
 
@@ -249,7 +271,7 @@ const RuleEngineRouteRouteWithChildren = RuleEngineRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   RuleEngineRouteRoute: RuleEngineRouteRouteWithChildren,
-  ApisIndexRoute: ApisIndexRoute,
+  ApiKeysIndexRoute: ApiKeysIndexRoute,
   ContextIndexRoute: ContextIndexRoute,
   DashboardIndexRoute: DashboardIndexRoute,
   FeatureFlagsIndexRoute: FeatureFlagsIndexRoute,

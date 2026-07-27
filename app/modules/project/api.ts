@@ -14,3 +14,13 @@ export const createProjectOptions = mutationOptions({
   mutationFn: async (project: Project) =>
     await operonApiClient.post<Project>(PROJECTS_ENDPOINT, project),
 });
+
+export const updateProjectOptions = mutationOptions({
+  mutationFn: async ({ id, project }: { id: string; project: Partial<Project> }) =>
+    await operonApiClient.patch<Project>(`${PROJECTS_ENDPOINT}/${id}`, project),
+});
+
+export const deleteProjectOptions = mutationOptions({
+  mutationFn: async (id: string) =>
+    await operonApiClient.delete(`${PROJECTS_ENDPOINT}/${id}`),
+});

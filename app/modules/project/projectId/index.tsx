@@ -1,5 +1,7 @@
+import { PromptModal } from "#/components/prompt-modal";
 import { useHeaderActions } from "#/contexts/header-actions";
-import { Box, Button, Sidebar, Textarea } from "@operon/ui";
+import { ChevronDown, Copy } from "@operon/icons";
+import { Box, Button, Dropdown, Sidebar, Textarea, toast } from "@operon/ui";
 import {
   useMutation,
   useQueryClient,
@@ -26,8 +28,8 @@ export const ProjectIdPage = () => {
   const [activeCollection, setActiveCollection] = useState<Collection | null>(
     collections[0] || null,
   );
-  console.log(activeCollection);
   const [schemaText, setSchemaText] = useState("");
+  const [isPromptOpen, setIsPromptOpen] = useState(false);
 
   const createCollection = useMutation({
     ...createCollectionOptions(projectId),
@@ -45,20 +47,20 @@ export const ProjectIdPage = () => {
       queryClient.invalidateQueries({
         queryKey: ["projects", projectId, "collections"],
       });
-      alert("Collection saved!");
+      toast.success("Collection saved!");
     },
   });
 
   useHeaderActions({
     "add-new-collection": () => {
-      const name = window.prompt("Enter new collection name:");
-      if (name) {
-        // Generating a simple ID from name
-        const id = name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-        (createCollection.mutate as any)({ id, name, meta_data: {} });
-      }
+      setIsPromptOpen(true);
     },
   });
+
+  const handleCreateCollection = (name: string) => {
+    const id = name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    (createCollection.mutate as any)({ id, name, meta_data: {} });
+  };
 
   useEffect(() => {
     if (activeCollection && activeCollection.meta_data) {
@@ -74,8 +76,15 @@ export const ProjectIdPage = () => {
       const schema = JSON.parse(schemaText);
       updateCollection.mutate(schema);
     } catch (e) {
-      alert("Invalid JSON format");
+      toast.error("Invalid JSON format");
     }
+  };
+
+  const handleCopyApiUrl = (env: string) => {
+    if (!activeCollection) return;
+    const url = `http://localhost:8080/api/content/${projectId}/${activeCollection._id}?env=${env}`; //have to change this
+    navigator.clipboard.writeText(url);
+    toast.success(`Copied ${env} API endpoint!`);
   };
 
   return (
@@ -104,12 +113,13 @@ export const ProjectIdPage = () => {
               style={{
                 backgroundColor:
                   activeCollection?._id === col._id
-                    ? "var(--operon-color-primary-subtle)"
+                    ? "var(--operon-color-surface-raised, #f0f0f0)"
                     : undefined,
                 color:
                   activeCollection?._id === col._id
                     ? "var(--operon-color-primary)"
                     : undefined,
+                fontWeight: activeCollection?._id === col._id ? "500" : "normal",
               }}
               onClick={() => setActiveCollection(col)}
             >
@@ -130,12 +140,32 @@ export const ProjectIdPage = () => {
           >
             <Box display="flex" justify="space-between" align="center">
               <Box {...classes.titleStyle}>{activeCollection.name}</Box>
-              <Button
-                onClick={handleSave}
-                disabled={updateCollection.isPending}
-              >
-                {updateCollection.isPending ? "Saving..." : "Save Schema"}
-              </Button>
+              <Box display="flex" align="center" gap={12}>
+                <Dropdown
+                  onSelect={handleCopyApiUrl}
+                  placement="bottom-end"
+                  trigger={
+                    <Button variant="outline">
+                      <Box display="flex" align="center" gap={8}>
+                        <Copy size={16} />
+                        Copy API URL
+                        <ChevronDown size={16} />
+                      </Box>
+                    </Button>
+                  }
+                  items={[
+                    { value: "development", label: "Development" },
+                    { value: "staging", label: "Staging" },
+                    { value: "production", label: "Production" },
+                  ]}
+                />
+                <Button
+                  onClick={handleSave}
+                  disabled={updateCollection.isPending}
+                >
+                  {updateCollection.isPending ? "Saving..." : "Save Schema"}
+                </Button>
+              </Box>
             </Box>
             <Box style={{ flex: 1, display: "flex", flexDirection: "column" }}>
               <Textarea
@@ -165,6 +195,15 @@ export const ProjectIdPage = () => {
           </Box>
         )}
       </Box>
+
+      <PromptModal
+        isOpen={isPromptOpen}
+        onClose={() => setIsPromptOpen(false)}
+        onSubmit={handleCreateCollection}
+        title="Add New Collection"
+        message="Enter a name for the new collection:"
+        placeholder="Collection Name"
+      />
     </Box>
   );
 };

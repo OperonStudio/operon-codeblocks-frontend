@@ -18,9 +18,9 @@
   },
   "dependencies": {
     "@morph-css/kit": "^0.4.4",
-    "@operon/icons": "^1.0.11",
+    "@operon/icons": "^1.0.13",
     "@operon/request": "^1.0.2",
-    "@operon/ui": "^1.0.8",
+    "@operon/ui": "^1.0.9",
     "@tanstack/react-devtools": "latest",
     "@tanstack/react-query": "latest",
     "@tanstack/react-query-devtools": "latest",

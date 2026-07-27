@@ -1,5 +1,6 @@
 import { AppThemeProvider } from "#/contexts/theme";
 import TanStackQueryDevtools from "@/integrations/tanstack-query/devtools";
+import { Toaster } from "@operon/ui";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
@@ -13,6 +14,7 @@ export const RootDocument = ({ children }: { children: React.ReactNode }) => {
       </head>
       <body>
         <AppThemeProvider>
+          <Toaster />
           <Dashboard>{children}</Dashboard>
         </AppThemeProvider>
         <TanStackDevtools

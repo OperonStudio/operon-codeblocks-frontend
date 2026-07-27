@@ -5,17 +5,23 @@ import { Link } from "@tanstack/react-router";
 import * as classes from "./style";
 
 export interface ProjectCardProps {
+  id: string;
   title: string;
   description: string;
   apiCount?: number;
   environments?: string[];
+  onEdit: (id: string, title: string, description: string) => void;
+  onDelete: (id: string, title: string) => void;
 }
 
 export const ProjectCard = ({
+  id,
   title,
   description,
   apiCount = 0,
   environments = [],
+  onEdit,
+  onDelete,
 }: ProjectCardProps) => {
   const isPhone = usePhone();
 
@@ -31,7 +37,7 @@ export const ProjectCard = ({
       >
         <Link
           to="/projects/$projectId"
-          params={{ projectId: title }}
+          params={{ projectId: id }}
           {...classes.linkStyle}
           style={{
             flex: 1,
@@ -93,6 +99,10 @@ export const ProjectCard = ({
             title="Edit"
             aria-label={`Edit ${title}`}
             style={{ padding: "8px", minWidth: 0 }}
+            onClick={(e) => {
+              e.preventDefault();
+              onEdit(id, title, description);
+            }}
           >
             <FileEdit size={18} />
           </Button>
@@ -102,6 +112,10 @@ export const ProjectCard = ({
             title="Delete"
             aria-label={`Delete ${title}`}
             style={{ padding: "8px", minWidth: 0 }}
+            onClick={(e) => {
+              e.preventDefault();
+              onDelete(id, title);
+            }}
           >
             <X size={18} />
           </Button>

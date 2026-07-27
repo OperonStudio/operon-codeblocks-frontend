@@ -8,7 +8,6 @@ import {
   KeyRound,
   Layers,
   LayoutDashboard,
-  Plug,
   Rocket,
   ScrollText,
   ShieldCheck,
@@ -73,10 +72,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
             href: "/projects",
           },
         ],
-      },
-      {
-        title: "APIs",
-        items: [{ label: "APIs", icon: Plug, href: "/apis" }],
       },
       {
         title: "RUNTIME",
