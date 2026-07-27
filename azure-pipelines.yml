@@ -15,8 +15,8 @@ steps:
   - task: vercel-deployment-task@3
     name: Deploy
     inputs:
-      vercelProjectId: '$(VERCEL_PROJECT_ID)'
-      vercelTeamId: '$(VERCEL_TEAM_ID)'
+      vercelProjectId: 'prj_ZMoV1OBoo7qyeIteCt6OU4b3s3LH'
+      vercelTeamId: 'team_AYRVerFJXeoaUBDxSl3uudVn'
       vercelToken: '$(VERCEL_TOKEN)'
       production: $(isMain)
     condition: or(eq(variables.isMain, true), eq(variables['Build.Reason'], 'PullRequest'))
