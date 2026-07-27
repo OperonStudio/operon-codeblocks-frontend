@@ -15,10 +15,11 @@ steps:
   - task: vercel-deployment-task@3
     name: Deploy
     inputs:
-      vercelProjectId: 'prj_ZMoV1OBoo7qyeIteCt6OU4b3s3LH'
-      vercelTeamId: 'team_AYRVerFJXeoaUBDxSl3uudVn'
       vercelToken: '$(VERCEL_TOKEN)'
       production: $(isMain)
+    env:
+      VERCEL_PROJECT_ID: 'prj_ZMoV1OBoo7qyeIteCt6OU4b3s3LH'
+      VERCEL_ORG_ID: 'team_AYRVerFJXeoaUBDxSl3uudVn'
     condition: or(eq(variables.isMain, true), eq(variables['Build.Reason'], 'PullRequest'))
 
   - task: vercel-azdo-pr-comment-task@3
