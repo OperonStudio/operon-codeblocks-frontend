@@ -13,6 +13,9 @@ export const AuthEndpoints = {
 export const DashboardEndpoints = {
   PROJECTS: "projects",
   API_KEYS: "api-keys",
+  ENVIRONMENTS: "environments",
+  CONTEXTS: "contexts",
+  WORKSPACES: "workspaces",
 } as const;
 
 const endpointGroups = {

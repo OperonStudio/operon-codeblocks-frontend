@@ -1,5 +1,5 @@
 {
-  "name": "operon-compose-frontend",
+  "name": "operon-analytics-frontend",
   "private": true,
   "type": "module",
   "imports": {
@@ -7,7 +7,7 @@
     "@/*": "./src/*"
   },
   "scripts": {
-    "dev": "vite dev --port 4000",
+    "dev": "vite dev --port 4003",
     "generate-routes": "tsr generate",
     "build": "vite build",
     "preview": "vite preview",
@@ -17,10 +17,11 @@
     "check": "biome check"
   },
   "dependencies": {
-    "@morph-css/kit": "^0.4.4",
-    "@operon/icons": "^1.0.14",
-    "@operon/request": "^1.0.2",
-    "@operon/ui": "^1.0.9",
+    "@morph-css/kit": "^0.4.9",
+    "@operon/auth": "file:../operon-auth-ui",
+    "@operon/icons": "file:../operon-icons",
+    "@operon/request": "file:../operon-requester",
+    "@operon/ui": "file:../operon-ui",
     "@tanstack/react-devtools": "latest",
     "@tanstack/react-query": "latest",
     "@tanstack/react-query-devtools": "latest",
@@ -29,7 +30,9 @@
     "@tanstack/react-router-ssr-query": "latest",
     "@tanstack/react-start": "latest",
     "@tanstack/router-plugin": "^1.132.0",
+    "@xyflow/react": "^12.11.2",
     "lucide-react": "^0.545.0",
+    "puppeteer": "^25.4.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

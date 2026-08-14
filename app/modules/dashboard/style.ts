@@ -2,7 +2,11 @@ import { css } from "@morph-css/kit";
 
 export const dashboardStyle = css({
   flex: 1,
-  backgroundColor: "var(--operon-color-surface)",
+  backgroundColor: "var(--operon-color-background, #f0f0ff)",
   display: "flex",
   flexDirection: "column",
+  padding: "32px",
+  "@media (max-width: 768px)": {
+    padding: "20px",
+  },
 });
