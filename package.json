@@ -1,5 +1,5 @@
 {
-  "name": "operon-analytics-frontend",
+  "name": "operon-codeblocks-frontend",
   "private": true,
   "type": "module",
   "imports": {
@@ -7,7 +7,7 @@
     "@/*": "./src/*"
   },
   "scripts": {
-    "dev": "vite dev --port 4003",
+    "dev": "vite dev --port 4002",
     "generate-routes": "tsr generate",
     "build": "vite build",
     "preview": "vite preview",

@@ -15,11 +15,15 @@ import {
 import { Link, useLocation, useMatches } from "@tanstack/react-router";
 import * as classes from "./style";
 
-const HOMEPAGE_URL = import.meta.env.VITE_HOMEPAGE_URL ?? "http://localhost:4001";
+const HOMEPAGE_URL =
+  import.meta.env.VITE_HOMEPAGE_URL ?? "http://localhost:4001";
 const COMPOSE_URL = import.meta.env.VITE_COMPOSE_URL ?? "http://localhost:4000";
-const CODEBLOCKS_URL = import.meta.env.VITE_CODEBLOCKS_URL ?? "http://localhost:4002";
-const ANALYTICS_URL = import.meta.env.VITE_ANALYTICS_URL ?? "http://localhost:4003";
-const AUTH_API_URL = import.meta.env.VITE_OPERON_AUTH_API_URL ?? "http://localhost:8081";
+const CODEBLOCKS_URL =
+  import.meta.env.VITE_CODEBLOCKS_URL ?? "http://localhost:4002";
+const ANALYTICS_URL =
+  import.meta.env.VITE_ANALYTICS_URL ?? "http://localhost:4003";
+const AUTH_API_URL =
+  import.meta.env.VITE_OPERON_AUTH_API_URL ?? "http://localhost:8081";
 
 const PRODUCTS: AppShellProduct[] = [
   {
@@ -53,7 +57,11 @@ function bridgeToken(baseUrl: string): string {
   return url.toString();
 }
 
-export const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+export const DashboardLayout = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const location = useLocation();
   const matches = useMatches();
   const matchWithSidebar = matches.find((m) => m.staticData?.sidebarGroups);
@@ -61,51 +69,53 @@ export const DashboardLayout = ({ children }: { children: React.ReactNode }) => 
   const { isDark, toggleTheme } = useAppTheme();
   const { user, logout } = useAuth();
 
-  const navGroups: AppShellNavGroup[] = sidebarGroups.map((group: any, i: number) => ({
-    key: `${group.title ?? "group"}-${i}`,
-    title: group.title,
-    items: group.items.map((item: any, j: number) => {
-      const Icon = item.icon;
-      const isActive =
-        item.href === "/"
-          ? location.pathname === "/"
-          : location.pathname.startsWith(item.href);
-      const isExternal = item.href.startsWith("http");
-      const render: AppShellNavItem["render"] = ({
-        href,
-        className,
-        children: content,
-        "aria-current": ac,
-      }) =>
-        isExternal ? (
-          <a
-            href={href}
-            className={className}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-current={ac}
-          >
-            {content}
-          </a>
-        ) : (
-          <Link to={href} className={className} aria-current={ac}>
-            {content}
-          </Link>
-        );
-      return {
-        key: `${item.href}-${j}`,
-        label: item.label,
-        icon: Icon ? <Icon size={16} /> : null,
-        href: item.href,
-        isActive,
-        render,
-      };
+  const navGroups: AppShellNavGroup[] = sidebarGroups.map(
+    (group: any, i: number) => ({
+      key: `${group.title ?? "group"}-${i}`,
+      title: group.title,
+      items: group.items.map((item: any, j: number) => {
+        const Icon = item.icon;
+        const isActive =
+          item.href === "/"
+            ? location.pathname === "/"
+            : location.pathname.startsWith(item.href);
+        const isExternal = item.href.startsWith("http");
+        const render: AppShellNavItem["render"] = ({
+          href,
+          className,
+          children: content,
+          "aria-current": ac,
+        }) =>
+          isExternal ? (
+            <a
+              href={href}
+              className={className}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-current={ac}
+            >
+              {content}
+            </a>
+          ) : (
+            <Link to={href} className={className} aria-current={ac}>
+              {content}
+            </Link>
+          );
+        return {
+          key: `${item.href}-${j}`,
+          label: item.label,
+          icon: Icon ? <Icon size={16} /> : null,
+          href: item.href,
+          isActive,
+          render,
+        };
+      }),
     }),
-  }));
+  );
 
   return (
     <AppShell
-      productKey="analytics"
+      productKey="codeblocks"
       products={PRODUCTS}
       navGroups={navGroups}
       sidebarHeader={<WorkspaceSwitcher />}

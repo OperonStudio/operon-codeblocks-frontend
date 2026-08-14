@@ -8,8 +8,10 @@ import { HeadContent, Scripts, useRouterState } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Dashboard } from "../dashboard/index";
 
-const AUTH_API_URL = import.meta.env.VITE_OPERON_AUTH_API_URL ?? "http://localhost:8081";
-const HOMEPAGE_URL = import.meta.env.VITE_HOMEPAGE_URL ?? "http://localhost:4001";
+const AUTH_API_URL =
+  import.meta.env.VITE_OPERON_AUTH_API_URL ?? "http://localhost:8081";
+const HOMEPAGE_URL =
+  import.meta.env.VITE_HOMEPAGE_URL ?? "http://localhost:4001";
 
 // Extract token synchronously before TanStack Router mounts and strips it
 if (typeof window !== "undefined") {

@@ -10,12 +10,19 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CodeblocksIndexRouteImport } from './routes/codeblocks/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as VisualEditorIndexRouteImport } from './routes/visual-editor/index'
+import { Route as MarketplacePluginsIndexRouteImport } from './routes/marketplace/plugins/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CodeblocksIndexRoute = CodeblocksIndexRouteImport.update({
+  id: '/codeblocks/',
+  path: '/codeblocks/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
@@ -28,35 +35,64 @@ const VisualEditorIndexRoute = VisualEditorIndexRouteImport.update({
   path: '/visual-editor/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MarketplacePluginsIndexRoute = MarketplacePluginsIndexRouteImport.update({
+  id: '/marketplace/plugins/',
+  path: '/marketplace/plugins/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/codeblocks/': typeof CodeblocksIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/visual-editor/': typeof VisualEditorIndexRoute
+  '/marketplace/plugins/': typeof MarketplacePluginsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/codeblocks': typeof CodeblocksIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/visual-editor': typeof VisualEditorIndexRoute
+  '/marketplace/plugins': typeof MarketplacePluginsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/codeblocks/': typeof CodeblocksIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/visual-editor/': typeof VisualEditorIndexRoute
+  '/marketplace/plugins/': typeof MarketplacePluginsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard/' | '/visual-editor/'
+  fullPaths:
+    | '/'
+    | '/codeblocks/'
+    | '/dashboard/'
+    | '/visual-editor/'
+    | '/marketplace/plugins/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/visual-editor'
-  id: '__root__' | '/' | '/dashboard/' | '/visual-editor/'
+  to:
+    | '/'
+    | '/codeblocks'
+    | '/dashboard'
+    | '/visual-editor'
+    | '/marketplace/plugins'
+  id:
+    | '__root__'
+    | '/'
+    | '/codeblocks/'
+    | '/dashboard/'
+    | '/visual-editor/'
+    | '/marketplace/plugins/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CodeblocksIndexRoute: typeof CodeblocksIndexRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
   VisualEditorIndexRoute: typeof VisualEditorIndexRoute
+  MarketplacePluginsIndexRoute: typeof MarketplacePluginsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,6 +102,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/codeblocks/': {
+      id: '/codeblocks/'
+      path: '/codeblocks'
+      fullPath: '/codeblocks/'
+      preLoaderRoute: typeof CodeblocksIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/': {
@@ -82,13 +125,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VisualEditorIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/marketplace/plugins/': {
+      id: '/marketplace/plugins/'
+      path: '/marketplace/plugins'
+      fullPath: '/marketplace/plugins/'
+      preLoaderRoute: typeof MarketplacePluginsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CodeblocksIndexRoute: CodeblocksIndexRoute,
   DashboardIndexRoute: DashboardIndexRoute,
   VisualEditorIndexRoute: VisualEditorIndexRoute,
+  MarketplacePluginsIndexRoute: MarketplacePluginsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

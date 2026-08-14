@@ -1,6 +1,6 @@
 import { RootDocument } from "#/modules/root-document";
 import "@morph-css/kit/css";
-import { Layers, LayoutDashboard } from "@operon/icons";
+import { Blocks, FileCode2, LayoutDashboard } from "@operon/icons";
 import operonMorphCss from "@operon/ui/dist/morphcss.css?url";
 import operonCss from "@operon/ui/dist/style.css?url";
 import { createRootRouteWithContext } from "@tanstack/react-router";
@@ -65,10 +65,20 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         title: "WORKSPACE",
         items: [
           { label: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
+        ],
+      },
+      {
+        title: "MARKETPLACE",
+        items: [
           {
-            label: "Visual Editor",
-            icon: Layers,
-            href: "/visual-editor",
+            label: "Plugins",
+            icon: Blocks,
+            href: "/marketplace/plugins",
+          },
+          {
+            label: "Codeblocks",
+            icon: FileCode2,
+            href: "/codeblocks",
           },
         ],
       },
