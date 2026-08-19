@@ -10,7 +10,7 @@ import type {
   OnConnect,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { Plus, Trash2, Save, Layers, Unplug, ArrowLeft } from "lucide-react";
+import { ArrowLeft, Layers, Plus, Save, Trash2, Unplug } from "@operon/icons";
 
 interface SavedMacro {
   id: string;
