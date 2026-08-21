@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { FlowBoard, Box, Button } from "@operon/ui";
+import { FlowBoard, Box, Button } from "@operonstudio/ui";
 import { addEdge, applyNodeChanges, applyEdgeChanges } from "@xyflow/react";
 import type {
   Node,
@@ -10,7 +10,7 @@ import type {
   OnConnect,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { ArrowLeft, Layers, Plus, Save, Trash2, Unplug } from "@operon/icons";
+import { ArrowLeft, Layers, Plus, Save, Trash2, Unplug } from "@operonstudio/icons";
 
 interface SavedMacro {
   id: string;

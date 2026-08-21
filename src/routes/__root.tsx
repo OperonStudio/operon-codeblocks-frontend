@@ -1,8 +1,8 @@
 import { RootDocument } from "#/modules/root-document";
 import "@morph-css/kit/css";
-import { Blocks, FileCode2, LayoutDashboard } from "@operon/icons";
-import operonMorphCss from "@operon/ui/dist/morphcss.css?url";
-import operonCss from "@operon/ui/dist/style.css?url";
+import { Blocks, FileCode2, LayoutDashboard } from "@operonstudio/icons";
+import operonMorphCss from "@operonstudio/ui/dist/morphcss.css?url";
+import operonCss from "@operonstudio/ui/dist/style.css?url";
 import { createRootRouteWithContext } from "@tanstack/react-router";
 
 import type { QueryClient } from "@tanstack/react-query";

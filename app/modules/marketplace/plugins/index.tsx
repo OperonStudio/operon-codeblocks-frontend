@@ -1,5 +1,5 @@
-import { Blocks } from "@operon/icons";
-import { Box, Button } from "@operon/ui";
+import { Blocks } from "@operonstudio/icons";
+import { Box, Button } from "@operonstudio/ui";
 
 export const PluginsPage = () => {
   return (

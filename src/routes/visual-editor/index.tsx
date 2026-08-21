@@ -1,4 +1,4 @@
-import { WebsiteEditor } from "@operon/ui";
+import { WebsiteEditor } from "@operonstudio/ui";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/visual-editor/")({

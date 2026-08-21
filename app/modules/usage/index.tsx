@@ -5,8 +5,8 @@ import {
   KeyRound,
   Plug,
   User,
-} from "@operon/icons";
-import { Box, Card } from "@operon/ui";
+} from "@operonstudio/icons";
+import { Box, Card } from "@operonstudio/ui";
 import { useQuery } from "@tanstack/react-query";
 import { getUsageOptions } from "./api";
 import * as classes from "./style";

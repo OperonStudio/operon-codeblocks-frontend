@@ -3,8 +3,8 @@ import {
   createWorkspaceOptions,
   getWorkspacesOptions,
 } from "#/common/workspace-api";
-import { Check, ChevronDown, LayoutDashboard, Plus } from "@operon/icons";
-import { Box, Button, toast } from "@operon/ui";
+import { Check, ChevronDown, LayoutDashboard, Plus } from "@operonstudio/icons";
+import { Box, Button, toast } from "@operonstudio/ui";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
@@ -30,9 +30,9 @@ export function useActiveWorkspace() {
 
   const handleRedirect = () => {
     const pathname = router.state.location.pathname;
-    if (pathname.startsWith("/projects/")) router.navigate({ to: "/projects" });
-    else if (pathname.startsWith("/rule-engine/")) router.navigate({ to: "/rule-engine" });
-    else if (pathname.startsWith("/api-keys/")) router.navigate({ to: "/api-keys" });
+    if (pathname.startsWith("/projects/")) router.navigate({ to: "/projects" as any });
+    else if (pathname.startsWith("/rule-engine/")) router.navigate({ to: "/rule-engine" as any });
+    else if (pathname.startsWith("/api-keys/")) router.navigate({ to: "/api-keys" as any });
   };
 
   useEffect(() => {
